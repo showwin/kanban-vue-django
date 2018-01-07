@@ -1,3 +1,5 @@
+Vue.use(VueWebsocket, "ws://localhost:8000");
+
 var card = Vue.component('card', {
   props: ['task'],
   template: `<div>
@@ -46,4 +48,34 @@ board = new Vue({
       this.tasks = response.body;
     });
   }
+})
+
+var wc = new Vue({
+  methods: {
+    add() {
+      this.$socket.emit("add", { a: 5, b: 3 });
+    }
+  },
+  socket: {
+		events: {
+			// Similar as this.$socket.on("changed", (msg) => { ... });
+			// If you set `prefix` to `/counter/`, the event name will be `/counter/changed`
+			//
+			changed(msg) {
+				console.log("Something changed: " + msg);
+			},
+
+			connect() {
+				console.log("Websocket connected to " + this.$socket.nsp);
+			},
+
+			disconnect() {
+				console.log("Websocket disconnected from " + this.$socket.nsp);
+			},
+
+			error(err) {
+				console.error("Websocket error!", err);
+			}
+		}
+	}
 })

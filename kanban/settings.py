@@ -37,13 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'channels',
+    'kanban',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -121,15 +123,9 @@ STATIC_URL = '/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, "assets")
 
-CACHES = {
+CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://{host_name}/{db_number}".format(host_name=os.environ['REDIS_HOSTNAME'],
-                                                             db_number=os.environ['REDIS_DB_NUMBER']),
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
-            "IGNORE_EXCEPTIONS": True,
-        },
-        "KEY_PREFIX": os.environ['REDIS_DB_PREFIX']
-    }
+        "BACKEND": "asgiref.inmemory.ChannelLayer",
+        "ROUTING": "kanban.routing.channel_routing",
+    },
 }

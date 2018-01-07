@@ -1,7 +1,7 @@
 import json
 import pickle
 
-from django.core.cache import cache
+from channels import Group
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import View
@@ -58,3 +58,21 @@ class AddTaskView(View):
         tasks = restore_data()
         tasks.append(new_task)
         store_data(tasks)
+
+
+def ws_add(message):
+    message.reply_channel.send({"accept": True})
+    Group("sample").add(message.reply_channel)
+
+
+# WS が切れたら sample というグループから外させる
+def ws_disconnect(message):
+    Group("sample").discard(message.reply_channel)
+
+
+def publish(request):
+    msg = request.GET.get('msg', 'null')
+    Group("sample").send({"text": msg})
+    print(msg)
+
+    return HttpResponse("Published!")

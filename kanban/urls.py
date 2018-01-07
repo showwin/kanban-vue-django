@@ -25,6 +25,8 @@ urlpatterns = [
     url(r'^add_task$', views.AddTaskView.as_view()),
 
     url(r'^initialize$', views.InitializeView.as_view()),
+
+    url(r'^publish$', views.publish, name='publish'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
