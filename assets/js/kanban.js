@@ -1,7 +1,7 @@
 var card = Vue.component('card', {
   props: ['task'],
   template: `<div>
-              <h3 class="title dd-handle" >{{ task.name }}</h3>
+              <h3 class="title dd-handle" >{{ task.title }}</h3>
               <div class="text">{{ task.content }}</div>
               <hr>
               <table class="status-button">
@@ -28,11 +28,7 @@ var filters = {
 board = new Vue({
   el: '#board',
   data: {
-    tasks: [
-      { name: '料理する', content: '今日の昼ごはん作る', status: 1 },
-      { name: 'お皿洗う', content: '昨日の分も合わせてお皿洗う', status: 1 },
-      { name: 'ゲームする', content: '早くおわらせてXCOM 2やるで〜', status: 2 }
-    ]
+    tasks: []
   },
   computed: {
     tasksOpen: function () {
@@ -44,5 +40,10 @@ board = new Vue({
     tasksDone: function () {
       return filters.done(this.tasks)
     }
+  },
+  created: function () {
+    this.$http.get('/tasks').then(response => {
+      this.tasks = response.body;
+    });
   }
 })
