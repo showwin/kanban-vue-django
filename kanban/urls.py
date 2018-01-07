@@ -22,6 +22,9 @@ from kanban import views as views
 urlpatterns = [
     url(r'^$', views.DashboardView.as_view()),
     url(r'^tasks$', views.GetTaskListView.as_view()),
+    url(r'^add_task$', views.AddTaskView.as_view()),
+
+    url(r'^initialize$', views.InitializeView.as_view()),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

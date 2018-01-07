@@ -8,14 +8,3 @@ service:
     - "3000:3000"
   environment:
     - DJANGO_ENV=development
-    - REDIS_HOSTNAME=redis
-    - REDIS_DB_NUMBER=0
-    - REDIS_DB_PREFIX=development
-  links:
-    - redis
-
-redis:
-  build: .
-  dockerfile: Dockerfile_redis
-  ports:
-    - "6380:6379"

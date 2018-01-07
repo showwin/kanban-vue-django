@@ -11,16 +11,21 @@
     <h1><i class="material-icons">check</i> To do list</h1>
   </div>
 
+  <div class="dd form-area">
+    <div class="kanban task-form">
+      <form action="/add_task">
+        <label>Title: </label><input type="text" name="title" class='task-input'><br>
+        <label>Content: <br></label><textarea type="text" name="content" class='task-input-textarea'></textarea>
+        <button class="addbutton"><i class="material-icons">control_point</i> Add new</button>
+    </div>
+  </div>
+
   <div class="dd" id='board'>
     <ol class="kanban To-do">
       <h2><i class="material-icons">report_problem</i> ToDo</h2>
       <li v-for="task in tasksOpen" v-bind:key="task.name" class="dd-item">
         <card v-bind:task="task"></card>
       </li>
-
-      <div class="actions">
-        <button class="addbutt"><i class="material-icons">control_point</i> Add new</button>
-      </div>
     </ol>
 
     <ol class="kanban progress">
