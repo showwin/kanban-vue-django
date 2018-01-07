@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^$', views.DashboardView.as_view()),
     url(r'^tasks$', views.GetTaskListView.as_view()),
     url(r'^add_task$', views.AddTaskView.as_view()),
+    url(r'^change_status$', views.ChangeStatusView.as_view()),
 
     url(r'^initialize$', views.InitializeView.as_view()),
 ]

@@ -6,11 +6,21 @@ var card = Vue.component('card', {
               <hr>
               <table class="status-button">
                 <tr>
-                  <td><button v-on:click="task.status -= 1">◀︎</button></td>
-                  <td><button v-on:click="task.status += 1">▶︎</button></td>
+                  <td><button v-on:click="decrStatus">◀︎</button></td>
+                  <td><button v-on:click="incrStatus">▶︎</button></td>
                 </tr>
               </table>
-            </div>`
+            </div>`,
+  methods: {
+    decrStatus: function () {
+      this.task.status -= 1;
+      this.$http.get('/change_status?id=' + this.task.id + '&status=' + this.task.status.toString());
+    },
+    incrStatus: function () {
+      this.task.status += 1;
+      this.$http.get('/change_status?id=' + this.task.id + '&status=' + this.task.status.toString());
+    }
+  }
 })
 
 var filters = {
