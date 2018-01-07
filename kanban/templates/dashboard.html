@@ -11,24 +11,11 @@
     <h1><i class="material-icons">check</i> To do list</h1>
   </div>
 
-  <div class="dd">
+  <div class="dd" id='board'>
     <ol class="kanban To-do">
-      <div class="kanban__title">
-        <h2><i class="material-icons">report_problem</i> To do</h2>
-      </div>
-      <li class="dd-item" data-id="1">
-        <h3 class="title dd-handle" >Do the dishes</h3>
-        <div class="text" contenteditable="true">wwPaul Rand once said, “The public is more familiar with bad fucking design than good design. It is, in effect, conditioned to prefer</div>
-      </li>
-
-      <li class="dd-item" data-id="2">
-        <h3 class="title dd-handle">log-in bug</h3>
-        <div class="text" contenteditable="true">Paul Rand once said, “The public is more familiar with bad fucking design than good design. It is, in effect, conditioned to prefer bad design,</div>
-      </li>
-
-      <li class="dd-item" data-id="3">
-        <h3 class="title dd-handle">ほげ</h3>
-        <div class="text" contenteditable="true">Paul Rand once said, “The public is more familiar with bad fucking design than good design. It is, in effect, conditioned to prefer bad design,</div>
+      <h2><i class="material-icons">report_problem</i> ToDo</h2>
+      <li v-for="task in tasksOpen" v-bind:key="task.name" class="dd-item">
+        <card v-bind:task="task"></card>
       </li>
 
       <div class="actions">
@@ -37,44 +24,22 @@
     </ol>
 
     <ol class="kanban progress">
-      <h2><i class="material-icons">build</i> In progress</h2>
-
-      <li class="dd-item" data-id="3">
-        <h3 class="title dd-handle">ほげ</h3>
-        <div class="text" contenteditable="true">Paul Rand once said, “The public is more familiar with bad fucking design than good design. It is, in effect, conditioned to prefer bad design,</div>
+      <h2><i class="material-icons">build</i> In Progress</h2>
+      <li v-for="task in tasksProgress" v-bind:key="task.name" class="dd-item">
+        <card v-bind:task="task"></card>
       </li>
     </ol>
 
-    <ol class="kanban  Done">
+    <ol class="kanban Done">
       <h2><i class="material-icons">check_circle</i> Done</h2>
-
-      <li class="dd-item" data-id="3">
-        <h3 class="title dd-handle">ほげ</h3>
-        <div class="text" contenteditable="true">Paul Rand once said, “The public is more familiar with bad fucking design than good design. It is, in effect, conditioned to prefer bad design,</div>
+      <li v-for="task in tasksDone" v-bind:key="task.name" class="dd-item">
+        <card v-bind:task="task"></card>
       </li>
-
-      <li class="dd-item" data-id="3">
-        <h3 class="title dd-handle">ほげ</h3>
-        <div class="text" contenteditable="true">Paul Rand once said, “The public is more familiar with bad fucking design than good design. It is, in effect, conditioned to prefer bad design,</div>
-      </li>
-
-      <div class="actions">
-        <button class="addbutt"><i class="material-icons">control_point</i> Add new</button>
-      </div>
     </ol>
 
-    <ol class="kanban Gone">
-      <h2><i class="material-icons">delete</i> Gone</h2>
-
-      <li class="dd-item" data-id="3">
-        <h3 class="title dd-handle">ほげ</h3>
-        <div class="text" contenteditable="true">Paul Rand once said, “The public is more familiar with bad fucking design than good design. It is, in effect, conditioned to prefer bad design,</div>
-      </li>
-
-      <div class="actions">
-        <button class="addbutt"><i class="material-icons">control_point</i> Add new</button>
-      </div>
-    </ol>
   </div>
+
+  <script type="text/javascript" src="{% static 'js/vue.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/kanban.js' %}"></script>
 </body>
 </html>
